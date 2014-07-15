@@ -1,0 +1,23 @@
+## In this file I'm using "josemazo/bmo:v1" as my "user/imageName:imageTag", and "bmo" as
+## "containerName"
+
+# Build image
+docker build -t josemazo/bmo:v1 .
+
+# Bash
+docker run -t -i -p 0.0.0.0:8888:8888 --name bmo -v $(pwd)/notebooks:/notebooks josemazo/bmo:v1 /bin/bash
+
+# Stop container
+docker stop bmo
+
+# Kill container
+docker kill bmo
+
+# Remove container
+docker rm bmo
+
+# With output in the terminal
+docker run -d -p 0.0.0.0:8888:8888 --name bmo -v $(pwd)/notebooks:/notebooks josemazo/bmo:v1 supervisord
+
+# Without output in the terminal
+docker run -p 0.0.0.0:8888:8888 --name bmo -v $(pwd)/notebooks:/notebooks josemazo/bmo:v1 supervisord
