@@ -1,0 +1,251 @@
+#!/usr/bin/env python
+
+# BMO command line tool
+
+# It controls the Docker BMO image
+
+# Is assumed that you are running this tool from the directory where is the
+# BMO Dockerfile, that a 'notebooks' folder exists in the same directory and
+# that you are not running another Docker container
+
+import argparse
+import getpass
+import grp
+import os
+import pwd
+import subprocess
+import sys
+
+
+# Constans
+BMO_VERSION = 0.1
+
+
+# Variables
+docker = 'docker'
+nsenter = 'docker-enter'
+
+image = 'josemazo/bmo:latest'
+container = 'bmo'
+
+network = '0.0.0.0:8888:8888'
+notebooks_dir = 'notebooks'
+volumes = '/notebooks:/notebooks'
+
+supervisor = 'supervisord'
+bash = 'bash'
+
+
+# Command builders
+def install_command(build=False):
+    if build:
+        return [docker, 'build', '-t', image, '.']
+    else:
+        return[docker, 'pull', image]
+
+
+def simple_command(command, extra=None):
+    c = [docker, command, container]
+    if extra:
+        c.append(extra)
+    return c
+
+
+def complex_command(command, console=False, detach=False):
+    path = os.getcwd()
+    c = [docker, 'run']
+    if console:
+        c.extend(['-t', '-i'])
+    if detach:
+        c.append('-d')
+    c.extend(['-v', path + volumes, '-p', network, '--name', container, image])
+    c.append(command)
+    return c
+
+
+def owner_command():
+    owner = getpass.getuser()
+    gid = pwd.getpwnam(owner).pw_gid
+    owner = owner + ':' + grp.getgrgid(gid).gr_name
+    return ['sudo', 'chown', '-R', owner, notebooks_dir]
+
+
+# Getting the status of the BMO container
+def container_status():
+    # Getting the console output
+    process = subprocess.Popen([docker, 'ps', '-a'], stdout=subprocess.PIPE)
+    out_err = process.communicate()
+    out = out_err[0]
+
+    # Looking if there is no containter running
+    lines = out.split('\n')
+    if len(lines) <= 2:
+        print 'BMO status: non-existent'
+        sys.exit(0)
+
+    # Looking for the 'Up' string
+    line = lines[1]
+    index = line.find('Up')
+    if index >= 0:
+        print 'BMO status: running'
+        sys.exit(0)
+
+    # Looking for the 'Exited' string
+    index = line.find('Exited')
+    if index >= 0:
+        # Looking if the status of the exited container is '-1'
+        index += len('Exited') + 2
+        exited = line[index:index + 2]
+        if exited != '-1':
+            print'BMO status: stopped'
+        else:
+            print 'BMO status: killed'
+        sys.exit(0)
+    print 'BMO status: unknown'
+
+
+# Creating the parser
+parser = argparse.ArgumentParser(
+    add_help=False,
+    description="BMO command line tool. It controls the Docker BMO image. \
+    Is assumed that you are running this tool from the directory where is \
+    the BMO Dockerfile, that a 'notebooks' folder exists in the same \
+    directory and that you are not running another Docker image.")
+group = parser.add_mutually_exclusive_group()
+
+
+# Adding arguments options
+group.add_argument('-h', '--help', action='store_true',
+                   help='show this help message and exit')
+
+group.add_argument('-v', '--version', action='store_true',
+                   help='show this BMO command line tool version')
+
+group.add_argument('-i', '--install', action='store_true',
+                   help='download the BMO Docker image from Docker Hub')
+
+group.add_argument('-ib', '--install-building', action='store_true',
+                   help='build the BMO Docker image from the Dockerfile')
+
+group.add_argument('-c', '--commit', action='store_true',
+                   help='save the changes of the BMO Docker image')
+
+group.add_argument('-s', '--start', action='store_true',
+                   help='start the IPyhton Notebook server from the BMO \
+                   Docker image')
+
+group.add_argument('-sl', '--start-log', action='store_true',
+                   help='same as "-s, --start" but showing IPython logs in \
+                   the terminal')
+
+group.add_argument('-b', '--bash', action='store_true',
+                   help='open a terminal in the BMO Docker image without \
+                   launch the IPython Notebook Server')
+
+group.add_argument('-f', '--finish', action='store_true',
+                   help='stop the BMO Docker image and remove the Docker \
+                   reference')
+
+group.add_argument('-fo', '--finish-only', action='store_true',
+                   help='stop the BMO Docker image without remove the Docker \
+                   reference')
+
+group.add_argument('-k', '--kill', action='store_true',
+                   help='kill the BMO Docker image and remove the Docker \
+                   reference')
+
+group.add_argument('-ko', '--kill-only', action='store_true',
+                   help='kill the BMO Docker image without remove the Docker \
+                   reference')
+
+group.add_argument('-rm', '--remove', action='store_true',
+                   help='remove the Docker reference of the BMO Docker image')
+
+group.add_argument('-e', '--enter', action='store_true',
+                   help='open a terminal in the BMO Docker image if it is \
+                   running / ask for root password')
+
+group.add_argument('-o', '--owner', action='store_true',
+                   help='change the owner of the notebooks from root to the \
+                   current user / ask for root password')
+
+group.add_argument('-st', '--status', action='store_true',
+                   help='show if the BMO Docker images is running, stopped, \
+                   killed or non-existent (removed)')
+
+
+# No arguments option
+if len(sys.argv) == 1:
+    parser.print_help()
+    sys.exit(0)
+
+
+# Obtaining arguments
+args, unknown = parser.parse_known_args()
+
+
+# Unknown argument/s options
+if unknown:
+    print 'Unkown argument/s\n'
+    parser.print_help()
+    sys.exit(0)
+
+
+# Looking for the argument
+commands = []
+
+if args.help:
+    parser.print_help()
+
+elif args.version:
+    print 'bmo', BMO_VERSION
+
+elif args.install:
+    commands.append(install_command(build=False))
+
+elif args.install_building:
+    commands.append(install_command(build=True))
+
+elif args.commit:
+    commands.append(simple_command('commit', extra=image))
+
+elif args.start:
+    commands.append(complex_command(supervisor, console=False, detach=True))
+
+elif args.start_log:
+    commands.append(complex_command(supervisor, console=False, detach=False))
+
+elif args.bash:
+    commands.append(complex_command(bash, console=True, detach=False))
+
+elif args.finish:
+    commands.append(simple_command('stop'))
+    commands.append(simple_command('rm'))
+
+elif args.finish_only:
+    commands.append(simple_command('stop'))
+
+elif args.kill:
+    commands.append(simple_command('kill'))
+    commands.append(simple_command('rm'))
+
+elif args.kill_only:
+    commands.append(simple_command('kill'))
+
+elif args.remove:
+    commands.append(simple_command('rm'))
+
+elif args.enter:
+    commands.append([nsenter, container])
+
+elif args.owner:
+    commands.append(owner_command())
+
+elif args.status:
+    container_status()
+
+
+# Calling command/s
+if commands:
+    for c in commands:
+        subprocess.call(c)

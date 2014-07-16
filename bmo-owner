@@ -1,2 +1,0 @@
-#!/bin/sh
-sudo chown -R $USER:$USER notebooks
