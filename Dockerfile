@@ -22,7 +22,6 @@ RUN pip install configobj lxml python-dateutil networkx textblob
 RUN pip install beautifulsoup4 gensim ipython[notebook] mpltools nltk pandas pattern scikit-learn simpy ujson
 RUN pip install statsmodels
 RUN pip install seaborn
-RUN pip install moss
 
 ADD resources/ipython_notebook_config.py /ipython_notebook_config.py
 RUN IPYTHON_DIR=$(ipython locate) && \
