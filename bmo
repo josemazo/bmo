@@ -1,12 +1,19 @@
 #!/usr/bin/env python
 
-# BMO command line tool
-
-# It controls the Docker BMO image
+# BMO command line tool.
 
 # Is assumed that you are running this tool from the directory where is the
 # BMO Dockerfile, that a 'notebooks' folder exists in the same directory and
 # that you are not running another Docker container
+
+# This script doesn't control Docker workflow by itself. It only sends 'Dcoker
+# actions', using mainly the Docker command line tool, and print the output
+# without check the Docker BMO container status. It's done that way to get the
+# actual Docker status in every command, so, you may look for help if any
+# errors ocurr.
+
+# At the end of this file there is a list with the actual commands that this
+# script runs.
 
 import argparse
 import getpass
@@ -107,10 +114,8 @@ def container_status():
 # Creating the parser
 parser = argparse.ArgumentParser(
     add_help=False,
-    description="BMO command line tool. It controls the Docker BMO image. \
-    Is assumed that you are running this tool from the directory where is \
-    the BMO Dockerfile, that a 'notebooks' folder exists in the same \
-    directory and that you are not running another Docker image.")
+    description="BMO command line tool. Open this file with a text editor to \
+    read more help.")
 group = parser.add_mutually_exclusive_group()
 
 
@@ -249,3 +254,52 @@ elif args.status:
 if commands:
     for c in commands:
         subprocess.call(c)
+
+
+'''
+List of Docker commands used in BMO
+
+Install
+docker pull josemazo/bmo:latest
+
+Install building
+docker build -t josemazo/bmo:latest .
+
+Commit
+docker commit bmo josemazo/bmo:latest
+
+Start
+docker run -d -v $(pwd)/notebooks:/notebooks -p 0.0.0.0:8888:8888 --name bmo josemazo/bmo:latest supervisord
+
+Start log
+docker run -v $(pwd)/notebooks:/notebooks -p 0.0.0.0:8888:8888 --name bmo josemazo/bmo:latest supervisord
+
+Bash
+docker run -t -i -v $(pwd)/notebooks:/notebooks -p 0.0.0.0:8888:8888 --name bmo josemazo/bmo:latest bash
+
+Finish
+docker stop bmo
+docker rm bmo
+
+Finish only
+docker stop bmo
+
+Kill
+docker kill bmo
+docker rm bmo
+
+Kill only
+docker kill bmo
+
+Remove
+docker rm bmo
+
+Enter
+docker-enter bmo
+
+Owner
+sudo chown -R $USER:$USER notebooks
+
+Status
+docker ps -a
+'''
