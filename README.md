@@ -12,13 +12,13 @@ A Machine Learning toolbox based on Docker and IPython Notebook.
 Content
 -------
 
-1. [Installation](Installation)
-  1. [Docker](Docker)
-  2. [nsenter](nsenter)
-  3. [BMO](BMO)
-2. [Usage](Usage)
-3. [List of Python main packages](List of Python main packages)
-4. [License and more](License and more)
+1. [Installation](#1-installation)
+  1. [Docker](#11-docker)
+  2. [nsenter](#12-nsenter)
+  3. [BMO](#13-bmo)
+2. [Usage](#2-usage)
+3. [List of Python main packages](#3-list-of-python-main-packages)
+4. [License and more](#4-license-and-more)
 
 1. Installation
 ---------------
@@ -91,7 +91,7 @@ $ sudo cp nsenter/nsenter nsenter/docker-enter /usr/local/bin/
 
 **Important**: if you install `nsenter` using the instructions of the [mentioned repo](http://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/) don't forget to install the `docker-enter` utilty. Also, if you can edit the `docker-enter` script and modify the line that call `nsenter` adding a `sudo` at the beginning, it will be great!
 
-### 1.2. BMO
+### 1.3. BMO
 
 You really don't need to install anything, but you need to download or build the `BMO Docker image`. There are no difference for use `BMO` between download or build the image. But if you are a `Docker` user and you want to modify the image, you need to build it. In the other case, it's is preferable to download the image because it's faster, a lot.
 ```
