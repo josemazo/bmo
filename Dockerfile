@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qqy install build-essential gfortran
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qqy autoremove
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qqy autoclean
 
+RUN pip install -U pip
 RUN pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
 
 RUN pip install numpy
