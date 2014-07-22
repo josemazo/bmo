@@ -7,7 +7,10 @@ VISIT https://github.com/josemazo/bmo FOR SEE THIS FILE FORMATTED
 BMO &mdash; ![BMO](https://raw.githubusercontent.com/josemazo/bmo/master/resources/bmo.png "BMO")
 =================================================================================================
 
-BMO, pronounced Beemo, is a Machine Learning toolbox based on Docker and IPython Notebook. It's extensible with any tool or package you need beacuse it's like having a mini-Linux inside your Linux!
+BMO, pronounced Beemo, is a Machine Learning toolbox based on Docker and IPython Notebook. Its main features are:
+* Provides an isolated Linux environment
+* Easy and replicable installation
+* Extensible with any tool or package you need
 
 Content
 -------
@@ -47,7 +50,7 @@ $ cd bmo/
 
 If you are not using `Ubuntu 14.04 (Trusty Tahr)` you can visit the [`Docker` installation page](https://docs.docker.com/installation/) for an extensive documentation.
 
-**Important**: after installing `Docker` you need to be sure that it can run without the use of `sudo`. If you are using `Ubuntu 14.04 (Trusty Tahr)`, this guide will show you how to do it.
+**Important**: after installing `Docker`, or if you have already installed, you need to be sure that it can run without the use of `sudo`. If you are using `Ubuntu 14.04 (Trusty Tahr)`, this guide will show you how to do it.
 
 In the case you are under `Ubuntu 14.04 (Trusty Tahr)` you can follow the next instructions.
 
