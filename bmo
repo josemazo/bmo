@@ -2,15 +2,15 @@
 
 # BMO command line tool.
 
-# Is assumed that you are running this tool from the directory where is the
+# It's assumed that you are running this tool from the directory where is the
 # BMO Dockerfile, that a 'notebooks' folder exists in the same directory and
 # that you are not running another Docker container
 
-# This script doesn't control Docker workflow by itself. It only sends 'Dcoker
+# This script doesn't control Docker workflow by itself. It only sends 'Docker
 # actions', using mainly the Docker command line tool, and print the output
 # without check the Docker BMO container status. It's done that way to get the
 # actual Docker status in every command, so, you may look for help if any
-# errors ocurr.
+# error ocurrs.
 
 # At the end of this file there is a list with the actual commands that this
 # script runs.
@@ -104,7 +104,7 @@ def container_status():
         index += len('Exited') + 2
         exited = line[index:index + 2]
         if exited != '-1':
-            print'BMO status: stopped'
+            print'BMO status: finished'
         else:
             print 'BMO status: killed'
         sys.exit(0)
@@ -124,7 +124,7 @@ group.add_argument('-h', '--help', action='store_true',
                    help='show this help message and exit')
 
 group.add_argument('-v', '--version', action='store_true',
-                   help='show this BMO command line tool version')
+                   help='show the version of this tool')
 
 group.add_argument('-i', '--install', action='store_true',
                    help='download the BMO Docker image from Docker Hub')
@@ -140,20 +140,20 @@ group.add_argument('-s', '--start', action='store_true',
                    Docker image')
 
 group.add_argument('-sl', '--start-log', action='store_true',
-                   help='same as "-s, --start" but showing IPython logs in \
-                   the terminal')
+                   help='same as "-s, --start" but showing the IPython main \
+                   log in the terminal')
 
 group.add_argument('-b', '--bash', action='store_true',
                    help='open a terminal in the BMO Docker image without \
                    launch the IPython Notebook Server')
 
 group.add_argument('-f', '--finish', action='store_true',
-                   help='stop the BMO Docker image and remove the Docker \
-                   reference')
+                   help='finish/stop the BMO Docker image and remove the \
+                   Docker reference')
 
 group.add_argument('-fo', '--finish-only', action='store_true',
-                   help='stop the BMO Docker image without remove the Docker \
-                   reference')
+                   help='finish/stop the BMO Docker image without remove the \
+                   Docker reference')
 
 group.add_argument('-k', '--kill', action='store_true',
                    help='kill the BMO Docker image and remove the Docker \
@@ -175,7 +175,7 @@ group.add_argument('-o', '--owner', action='store_true',
                    current user / ask for root password')
 
 group.add_argument('-st', '--status', action='store_true',
-                   help='show if the BMO Docker images is running, stopped, \
+                   help='show if the BMO Docker image is running, finished, \
                    killed or non-existent (removed)')
 
 
@@ -259,47 +259,47 @@ if commands:
 '''
 List of Docker commands used in BMO
 
-Install
+Install: -i, --install
 docker pull josemazo/bmo:latest
 
-Install building
+Install building: -ib, --install-building
 docker build -t josemazo/bmo:latest .
 
-Commit
+Commit: -c, --commit
 docker commit bmo josemazo/bmo:latest
 
-Start
+Start: -s, --start
 docker run -d -v $(pwd)/notebooks:/notebooks -p 0.0.0.0:8888:8888 --name bmo josemazo/bmo:latest supervisord
 
-Start log
+Start log: -sl, --start-log
 docker run -v $(pwd)/notebooks:/notebooks -p 0.0.0.0:8888:8888 --name bmo josemazo/bmo:latest supervisord
 
-Bash
+Bash: -b, --bash
 docker run -t -i -v $(pwd)/notebooks:/notebooks -p 0.0.0.0:8888:8888 --name bmo josemazo/bmo:latest bash
 
-Finish
+Finish: -f, --finish
 docker stop bmo
 docker rm bmo
 
-Finish only
+Finish only: -fo, --finish-only
 docker stop bmo
 
-Kill
+Kill: -k, --kill
 docker kill bmo
 docker rm bmo
 
-Kill only
+Kill only: -ko, --kill-only
 docker kill bmo
 
-Remove
+Remove: -rm, --remove
 docker rm bmo
 
-Enter
+Enter: -e, --enter
 docker-enter bmo
 
-Owner
+Owner: -o, --owner
 sudo chown -R $USER:$USER notebooks
 
-Status
+Status: -st, --status
 docker ps -a
 '''
