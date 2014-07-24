@@ -28,7 +28,8 @@ Content
   6. [Commit](#26-commit)
   7. [Status](#27-status)
 3. [List of the installed Python main packages](#3-list-of-the-installed-python-main-packages)
-4. [License and more](#4-license-and-more)
+4. [Notes](#4-notes)
+5. [License and more](#5-license-and-more)
 
 1. Installation
 ---------------
@@ -154,7 +155,7 @@ Now you are in the IPython Notebook environment. You can visit [this link](http:
 
 The directory that you are seeing in your browser it's the `notebooks` folder inside the root of the `BMO Docker container`. This directory corresponds to the `notebooks` folder that is inside the current directory in your terminal. That folder will contain your notebooks.
 
-**Important**: `Docker` have a little problem with the files that it creates outside the `container`. The owner of these files is `root`. For change that, you can run the next command everytime you need:
+**Important**: `Docker` have a little problem with the files that it creates outside the `container`. The owner of these files is `root`. For change that, you can run the next command everytime you need (it will ask for your root password):
 ```
 ./bmo -o
 ```
@@ -178,7 +179,7 @@ After doing whatever you need, execute the next command for remove the `Docker` 
 ./bmo -rm
 ```
 
-Also, after that, it's the perfect time for change the owner of the notebooks with:
+Also, after that, it's the perfect time for change the owner of the notebooks with (it will ask for your root password):
 ```
 ./bmo -o
 ```
@@ -202,7 +203,7 @@ Take a look to the [previous section](#23-finish) for see how to deal with the `
 
 ### 2.5. Enter
 
-If you need some `Python` package, or a `Linux` one, that isn't installed on the `BMO Docker image` you can install them wiht `pip` or `apt-get`. For that, if the `BMO Docker containter` is running, you can execute:
+If you need some `Python` package, or a `Linux` one, that isn't installed on the `BMO Docker image` you can install them wiht `pip` or `apt-get`. For that, if the `BMO Docker containter` is running, you can execute (it will ask for your root password):
 ```
 ./bmo -e
 ```
@@ -261,7 +262,14 @@ Once the `BMO Docker image` has been downloaded or builded, a bunch of Python pa
 * statsmodels
 * textblob
 
-4. License and more
+4. Notes
+--------
+
+* The version of `Linux` that contains the `image` is a minified version of `Ubuntu 14.04 Trusty Thar`.
+* If you use `matplotlib` with the option `text.usetex = True` you will get an error. The cause of this is that `Latex` isn't installed beacuse the installation with its dependences occupies approximately 1GB, the same as the `BMO Docker image`. If you need `Latex` you can install it very easily.
+* The only `writter` installed for `matplotlib's animations` is `imagemagick`, so you can create `GIFs`! If you need another `writter`, feel free to install it.
+
+5. License and more
 -------------------
 
 * This project is released under the `MIT License`.
