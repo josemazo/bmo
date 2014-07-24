@@ -41,7 +41,7 @@ Content
 
 `BMO` is based on `Docker`, and the last one can be installed only on `Linux/x64`, so, `BMO` is restricted to the same platforms. This guide only covers the complete `BMO`installation on `Ubuntu 14.04 (Trusty Tahr)`, but excpet for the `Docker` installation step, you can use this guide with any Linux distribution. So, let's start! But before, you need to download `BMO`. For that open a terminal and execute these commands:
 ```
-$ wget https://github.com/josemazo/bmo/releases/download/v0.1/bmo-v0.1.tar.gz
+$ wget https://github.com/josemazo/bmo/releases/download/v0.1.1/bmo-v0.1.1.tar.gz
 $ tar -zxvf bmo-v0.1.tar.gz
 $ rm bmo-v0.1.tar.gz
 $ cd bmo/
