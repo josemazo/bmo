@@ -115,12 +115,12 @@ You really don't need to install anything, but you need to download or build the
 
 So, to download:
 ```
-./bmo -i
+$ ./bmo -i
 ```
 
 Or, if you decide to build it:
 ```
-./bmo -ib
+$ ./bmo -ib
 ```
 
 Wait, and that's all. You are finished with the installation.
@@ -140,7 +140,7 @@ You may now be thinking that using `BMO`, having `Docker` in the middle, can be 
 
 Let's see the main use cases. If you need some more help, you can run:
 ```
-./bmo --help
+$ ./bmo --help
 ```
 or you can become a `Docker` pro-user reading [this guide](https://docs.docker.com/userguide/). You will thank yourself for reading it, beacause `Docker` is prety awesome. Also, in the help command, it's never mentioned the word `container`, it used the concept `Docker image`, for try to abstract the logic behind `Docker`.
 
@@ -148,7 +148,7 @@ or you can become a `Docker` pro-user reading [this guide](https://docs.docker.c
 
 For start using the `IPython Notebook` that `BMO` provides, you only need to execute the next command:
 ```
-./bmo -s
+$ ./bmo -s
 ```
 
 The output that you are seeing is a `Docker` output. The `bmo` script always shows them, so you can look for help if any error ocurrs.
@@ -164,21 +164,21 @@ The directory that you are seeing in your browser it's the `notebooks` folder in
 
 **Important**: `Docker` have a little problem with the files that it creates outside the `container`. The owner of these files is `root`. For change that, you can run the next command everytime you need (it will ask for your root password):
 ```
-./bmo -o
+$ ./bmo -o
 ```
 
 ### 2.3. Finish
 
 If you have finished your work with the `IPython Notebook` server for the current sesion, you can finish the `BMO Docker container` with:
 ```
-./bmo -f
+$ ./bmo -f
 ```
 
 This will finish the `container` and remove its reference from `Docker`.
 
 If you want to finish the `container` without remove its reference, for example, for [save changes](#26-commit), you can execute:
 ```
-./bmo -fo
+$ ./bmo -fo
 ```
 
 After doing whatever you need, like [`commit`](#26-commit) your changes of the ` BMO Docker image`, execute the next command for remove the `Docker` reference:
@@ -188,7 +188,7 @@ After doing whatever you need, like [`commit`](#26-commit) your changes of the `
 
 Also, after that, it's the perfect time for change the owner of the notebooks with (it will ask for your root password):
 ```
-./bmo -o
+$ ./bmo -o
 ```
 as we saw in the previous section.
 
@@ -198,12 +198,12 @@ as we saw in the previous section.
 
 Please, execute a `kill` command only when the `BMO Docker container` doesn't respond or became frozen, it's your last resort. For kill it, you can execute:
 ```
-./bmo -k
+$ ./bmo -k
 ```
 
 As the `finish` command, the `kill` one also can be executed without remove the `BMO Docker container` reference:
 ```
-./bmo -ko
+$ ./bmo -ko
 ```
 
 Take a look to the [previous section](#23-finish) for see how to deal with the `Docker` reference after kill the `conainter` without remove it.
@@ -212,12 +212,12 @@ Take a look to the [previous section](#23-finish) for see how to deal with the `
 
 If you need some `Python` package, or a `Linux` one, that isn't installed on the `BMO Docker image` you can install them wiht `pip` or `apt-get`. For that, if the `BMO Docker containter` is running, you can execute (it will ask for your root password):
 ```
-./bmo -e
+$ ./bmo -e
 ```
 
 You will see a `prompt`. Now your are inside the `container` logged as `root`. Install everything you need and type:
 ```
-exit
+$ exit
 ```
 
 to return to your machine `prompt`.
@@ -228,7 +228,7 @@ to return to your machine `prompt`.
 
 If you have made some changes to the `container` that you would like them to be permanent you need to `commit` the current `BMO Docker container`. For that you need that the `container` is running or finished, never killed (bad practice) or removed. After [check](#27-status) that, execute:
 ```
-./bmo -c
+$ ./bmo -c
 ```
 
 And your `container` will be saved in the `BMO Docker image`.
@@ -237,7 +237,7 @@ And your `container` will be saved in the `BMO Docker image`.
 
 Sometimes you will want to know the state of the `BMO Docker container`. For that, you can use:
 ```
-./bmo -st
+$ ./bmo -st
 ```
 
 The possible status of `BMO` are:
@@ -275,7 +275,7 @@ Once the `BMO Docker image` has been downloaded or builded, a bunch of Python pa
 * The version of `Linux` that contains the `image` is a minified version of `Ubuntu 14.04 (Trusty Thar)`.
 * If you use `matplotlib` with the option `text.usetex = True` you will get an error. The cause of this is that `Latex` isn't installed beacuse the installation with its dependences occupies approximately 1GB, almost the same as the `BMO Docker image`. If you need `Latex` you can install it very easily by typing:
 ```
-apt-get install texlive-latex-extra
+$ apt-get install texlive-latex-extra
 ```
 * The only `writter` installed for `matplotlib's animations's` is `imagemagick`, so you can create `GIFs`! If you need another `writter`, feel free to install it.
 * The `nltk` package comes without its data. The best way to download it, it's to start `BMO` in `bash` mode, run the downdload module from `nltk` as a script and ending by committing `BMO` after exit:
