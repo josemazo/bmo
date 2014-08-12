@@ -39,7 +39,7 @@ Content
 * [Docker](https://www.docker.com/)
 * [nsenter](https://github.com/jpetazzo/nsenter) and the `docker-enter` utility
 
-`BMO` is based on `Docker`, and the last one can only be installed on `Linux/x64`, so, `BMO` is restricted to the same platforms. This guide only covers the complete `BMO`installation on `Ubuntu 12.04 (Precise Pangolin)` and `Ubuntu 14.04 (Trusty Tahr)`, (instructions extracted from the [`Docker` installation page](https://docs.docker.com/installation/)), but excpet for the `Docker` installation step, you can use this guide with any Linux distribution. So, let's start! But before, you need to download `BMO`. For that, open a terminal and execute these commands:
+`BMO` is based on `Docker`, and the last one can only be installed on `Linux/x64`, so, `BMO` is restricted to the same platforms. This guide only covers the complete `BMO` installation on `Ubuntu 12.04 (Precise Pangolin)` and `Ubuntu 14.04 (Trusty Tahr)`, (instructions extracted from the [`Docker` installation page](https://docs.docker.com/installation/)), but excpet for the `Docker` installation step, you can use this guide with any Linux distribution. So, let's start! But before, you need to download `BMO`. For that, open a terminal and execute these commands:
 ```
 $ wget https://github.com/josemazo/bmo/releases/download/v0.1.1/bmo-v0.1.1.tar.gz
 $ tar -zxvf bmo-v0.1.tar.gz
@@ -130,7 +130,7 @@ Wait, and that's all. You are finished with the installation.
 
 ### 2.1. Initial considerations
 
-Before start explaining how to use `BMO`, it would be nice to _briefly_ know how `Docker` works. `Docker` takes an `image`, something like in a virtual machine, and boots a `Linux` in your running `Linux`, something like a virutal machine. So, what is the difference? It's a little bit complicated, but you can read about what `Docker` is [here](https://docs.docker.com/introduction/understanding-docker/). The point here is that you will have much better performance that in a virtual machine, in most cases, the same as if you run your sofware from your native machine, and this is very important when you are dealing with `Machine Learning`.
+Before start explaining how to use `BMO`, it would be nice to _briefly_ know how `Docker` works. `Docker` takes an `image`, something like in a virtual machine, and boots a `Linux` in your running `Linux`, something like a virutal machine. So, what is the difference? It's a little bit complicated, but [here](https://docs.docker.com/introduction/understanding-docker/) you can read about what `Docker` is. The point here is that you will have much better performance that in a virtual machine, in most cases, the same as if you run your sofware from your native machine, and this is very important when you are dealing with `Machine Learning`.
 
 In summary, the main thing about `Docker` is that you have `images` and `containers`. A `container` is a running instance of an `image`, so you can have multiple `containers` from the same `image`. And what happens when you install some software or you create some files in a `container`? You can lose them if you remove the `container`, but you only need to commit the changes to an `image`, kind of _super easy_.
 
@@ -273,7 +273,7 @@ Once the `BMO Docker image` has been downloaded or builded, a bunch of Python pa
 --------
 
 * The version of `Linux` that contains the `image` is a minified version of `Ubuntu 14.04 (Trusty Thar)`.
-* If you use `matplotlib` with the option `text.usetex = True` you will get an error. The cause of this is that `Latex` isn't installed beacuse the installation with its dependences occupies approximately 1GB, almost the same as the `BMO Docker image`. If you need `Latex` you can install it very easily by typing:
+* If you use `matplotlib` with the option `text.usetex = True` you will get an error. The cause of this is that `LaTeX` isn't installed beacuse the installation with its dependences occupies approximately 1GB, almost the same as the `BMO Docker image`. If you need `Latex` you can install it very easily by typing:
 ```
 $ apt-get install texlive-latex-extra
 ```
