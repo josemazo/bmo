@@ -265,7 +265,8 @@ Once the `BMO Docker image` has been downloaded or builded, a bunch of Python pa
 * scikit-learn
 * scipy
 * seaborn
-* simpy ujson
+* simpy
+* ujson
 * statsmodels
 * textblob
 
