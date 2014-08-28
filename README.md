@@ -4,7 +4,7 @@ VISIT https://github.com/josemazo/bmo FOR SEE THIS FILE FORMATTED
 
 -->
 
-BMO &mdash; ![BMO](https://raw.githubusercontent.com/josemazo/bmo/master/resources/bmo.png "BMO")
+BMO &mdash; ![BMO](resources/bmo.png "BMO")
 =================================================================================================
 
 BMO, pronounced Beemo, is a Machine Learning toolbox based on Docker and IPython Notebook. Its main features are:
