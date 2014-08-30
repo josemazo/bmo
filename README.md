@@ -8,9 +8,9 @@ BMO &mdash; ![BMO](resources/bmo.png "BMO")
 =================================================================================================
 
 BMO, pronounced Beemo, is a Machine Learning toolbox based on Docker and IPython Notebook. Its main features are:
-* Provides an isolated Linux environment
-* Easy and replicable installation
-* Extensible with any tool or package you need
+* Provides an isolated Linux environment.
+* Easy and replicable installation.
+* Extensible with any tool or package you need.
 
 Content
 -------
@@ -35,11 +35,11 @@ Content
 ---------------
 
 `BMO` has the next requirements, but continue reading before install anything.
-* [Linux/x64](http://distrowatch.com/dwres.php?resource=major)
-* [Docker](https://www.docker.com/)
-* [nsenter](https://github.com/jpetazzo/nsenter) and the `docker-enter` utility
+* [Linux/x64](http://distrowatch.com/dwres.php?resource=major).
+* [Docker](https://www.docker.com/).
+* [nsenter](https://github.com/jpetazzo/nsenter) and the `docker-enter` utility.
 
-`BMO` is based on `Docker`, and the last one can only be installed on `Linux/x64`, so, `BMO` is restricted to the same platforms. This guide only covers the complete `BMO` installation on `Ubuntu 12.04 (Precise Pangolin)` and `Ubuntu 14.04 (Trusty Tahr)`, (instructions extracted from the [`Docker` installation page](https://docs.docker.com/installation/)), but excpet for the `Docker` installation step, you can use this guide with any Linux distribution. So, let's start! But before, you need to download `BMO`. For that, open a terminal and execute these commands:
+`BMO` is based on `Docker`, that can only be installed on `Linux/x64`, so, `BMO` is restricted to the same platforms. This guide only covers the complete `BMO` installation on `Ubuntu 12.04 (Precise Pangolin)` and `Ubuntu 14.04 (Trusty Tahr)`, (instructions extracted from the [`Docker` installation page](https://docs.docker.com/installation/)), but except for the `Docker` installation step, you can use this guide with any Linux distribution. So, let's start! But before, you need to download `BMO`. For that, open a terminal and execute these commands:
 ```
 $ wget https://github.com/josemazo/bmo/releases/download/v0.1.1/bmo-v0.1.1.tar.gz
 $ tar -zxvf bmo-v0.1.tar.gz
@@ -67,7 +67,7 @@ $ sudo apt-get -y install curl
 $ curl -s https://get.docker.io/ubuntu/ | sudo sh
 ```
 
-To verify that everything has worked as expected, excute these lines:
+To verify that everything has worked as expected, execute these lines:
 ```
 $ sudo docker version
 ```
@@ -91,7 +91,7 @@ $ sudo gpasswd -a ${USER} docker
 $ sudo service docker restart
 ```
 
-Loogout and log back in and check the version of `Docker` again:
+Logout and log back in and check the version of `Docker` again:
 ```
 $ docker version
 ```
@@ -111,7 +111,7 @@ $ sudo cp nsenter/nsenter nsenter/docker-enter /usr/local/bin/
 
 ### 1.3. BMO
 
-You really don't need to install anything, but you need to download or build the `BMO Docker image`. There are no difference between download or build the `image`. But if you are a `Docker` pro-user and you want to modify the image, you need to build it. In the other case, it's preferable to download the image because it's faster, a lot.
+You really don't need to install anything, but you need to download or build the `BMO Docker image`. There are no difference between download or build the `image`. But if you are a `Docker` pro-user and you want to modify the image, you need to build it. In other case, it's preferable to download the image because it's a lot faster.
 
 So, to download:
 ```
@@ -123,18 +123,18 @@ Or, if you decide to build it:
 $ ./bmo -ib
 ```
 
-Wait, and that's all. You are finished with the installation.
+Wait, and that's all. You have finished with the installation.
 
 2. Usage
 --------
 
 ### 2.1. Initial considerations
 
-Before start explaining how to use `BMO`, it would be nice to _briefly_ know how `Docker` works. `Docker` takes an `image`, something like in a virtual machine, and boots a `Linux` in your running `Linux`, something like a virutal machine. So, what is the difference? It's a little bit complicated, but [here](https://docs.docker.com/introduction/understanding-docker/) you can read about what `Docker` is. The point here is that you will have much better performance that in a virtual machine, in most cases, the same as if you run your sofware from your native machine, and this is very important when you are dealing with `Machine Learning`.
+Before start explaining how to use `BMO`, it would be nice to _briefly_ know how `Docker` works. `Docker` takes an `image`, something like in a virtual machine, and boots a `Linux` in your running `Linux`, something like a virutal machine, again. So, what is the difference? It's a little bit complicated, but [here](https://docs.docker.com/introduction/understanding-docker/) you can read about what `Docker` is. The point here is that you will have much better performance than in a virtual machine, in most cases, the same as if you run your sofware from your native machine, and this is very important when you are dealing with `Machine Learning`.
 
 In summary, the main thing about `Docker` is that you have `images` and `containers`. A `container` is a running instance of an `image`, so you can have multiple `containers` from the same `image`. And what happens when you install some software or you create some files in a `container`? You can lose them if you remove the `container`, but you only need to commit the changes to an `image`, kind of _super easy_.
 
-You may now be thinking that using `BMO`, having `Docker` in the middle, can be very difficult. But don't worry, for that, a `Python` script is provided, called `bmo`, something like a very basic `command line utility` for make your life easier. But if you are `Docker` pro-user you can take a look to the `Dockerfile` and the `bmo` script to understand everything. Also, for the those users, at the end of the `bmo` script you can find the full list of `Docker commands` that the script uses.
+You may now be thinking that using `BMO`, having `Docker` in the middle, can be very difficult. But don't worry, for that, a `Python` script is provided, called `bmo`, something like a very basic `command line utility` for make your life easier. But if you are `Docker` pro-user you can take a look to the `Dockerfile` and the `bmo` script to understand everything. Also, for those users, at the end of the `bmo` script you can find the full list of `Docker commands` that the script uses.
 
 **Important**: if you aren't a `Docker` pro-user, you must know that if you use `Docker` without using the `bmo` script, a proper behaviour is not totally guaranteed.
 
@@ -142,7 +142,7 @@ Let's see the main use cases. If you need some more help, you can run:
 ```
 $ ./bmo --help
 ```
-or you can become a `Docker` pro-user reading [this guide](https://docs.docker.com/userguide/). You will thank yourself for reading it, beacause `Docker` is prety awesome. Also, in the help command, it's never mentioned the word `container`, it used the concept `Docker image`, for try to abstract the logic behind `Docker`.
+or you can become a `Docker` pro-user reading [this guide](https://docs.docker.com/userguide/). You will thank yourself for reading it, beacause `Docker` is prety awesome. Also, in the help command, it's never mentioned the word `container`, it used the concept `Docker image`, for trying to abstract the logic behind `Docker`.
 
 ### 2.2. Start
 
@@ -192,7 +192,7 @@ $ ./bmo -o
 ```
 as we saw in the previous section.
 
-**Important**: remember that for start the `BMO Docker container` again you need that its `Docker`reference is deleted.
+**Important**: remember that for starting the `BMO Docker container` again you need that its `Docker`reference is deleted.
 
 ### 2.4. Kill
 
@@ -206,7 +206,7 @@ As the `finish` command, the `kill` one also can be executed without remove the 
 $ ./bmo -ko
 ```
 
-Take a look to the [previous section](#23-finish) for see how to deal with the `Docker` reference after kill the `conainter` without remove it.
+Take a look to the [previous section](#23-finish) to see how to deal with the `Docker` reference after kill the `container` without remove it.
 
 ### 2.5. Enter
 
@@ -215,7 +215,7 @@ If you need some `Python` package, or a `Linux` one, that isn't installed on the
 $ ./bmo -e
 ```
 
-You will see a `prompt`. Now your are inside the `container` logged as `root`. Install everything you need and type:
+You will see a `prompt`. Now you are inside the `container` logged as `root`. Install everything you need and type:
 ```
 $ exit
 ```
@@ -241,15 +241,15 @@ $ ./bmo -st
 ```
 
 The possible status of `BMO` are:
-* running
-* finished: you need to remove the `container` for start `BMO` again
-* killed: you need to remove the `container` for start `BMO` again
-* non-existent: there isn't any `container` attached to `Docker`, so you can start a new one
+* running,
+* finished: you need to remove the `container` for start `BMO` again,
+* killed: you need to remove the `container` for start `BMO` again,
+* non-existent: there isn't any `container` attached to `Docker`, so you can start a new one.
 
 3. List of the installed Python main packages
 ---------------------------------------------
 
-Once the `BMO Docker image` has been downloaded or builded, a bunch of Python packages will be installed in the `image`. Here is a list of the main ones:
+Once the `BMO Docker image` has been downloaded or built, a bunch of Python packages will be installed in the `image`. Here is a list of the main ones:
 * beautifulsoup4
 * gensim
 * ipython[notebook]
@@ -279,7 +279,7 @@ Once the `BMO Docker image` has been downloaded or builded, a bunch of Python pa
 $ apt-get install texlive-latex-extra
 ```
 * The only `writter` installed for `matplotlib's animations's` is `imagemagick`, so you can create `GIFs`! If you need another `writter`, feel free to install it.
-* The `nltk` package comes without its data. The best way to download it, it's to start `BMO` in `bash` mode, run the downdload module from `nltk` as a script and ending by committing `BMO` after exit:
+* The `nltk` package comes without its data. The best way to download it, it's to start `BMO` in `bash` mode, run the downdload module from `nltk` as a script and end by committing `BMO` after exit:
 ```
 $ ./bmo -s
 $ python -m nltk.downloader all
