@@ -29,7 +29,8 @@ Content
   7. [Status](#27-status)
 3. [List of the installed Python main packages](#3-list-of-the-installed-python-main-packages)
 4. [Notes](#4-notes)
-5. [License and more](#5-license-and-more)
+5. [Examples and tutorials](#5-examples-and-tutorials)
+6. [License and more](#6-license-and-more)
 
 1. Installation
 ---------------
@@ -288,7 +289,24 @@ $ ./bmo -c
 $ ./bmo -f
 ```
 
-5. License and more
+5. Examples and tutorials
+-------------------------
+
+The next list shows a few examples and tutorials for IPython Notebook and some Python's libraries, each of them created by its respective author.
+* [IPython Notebook - Basics](http://nbviewer.ipython.org/github/ipython/ipython/blob/master/examples/Notebook/Notebook%20Basics.ipynb)
+* [IPython Notebook - Running code](http://nbviewer.ipython.org/github/ipython/ipython/blob/master/examples/Notebook/Running%20Code.ipynb)
+* [IPython Notebook - Markdown cells](http://nbviewer.ipython.org/github/ipython/ipython/blob/master/examples/Notebook/Working%20With%20Markdown%20Cells.ipynb)
+* [beautifulsoup](http://programminghistorian.org/lessons/intro-to-beautiful-soup)
+* [matplotlib](http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb)
+* [networkx](http://networkx.github.io/documentation/latest/tutorial/tutorial.html)
+* [nltk](http://www.nltk.org/book/)
+* [numpy](http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-2-Numpy.ipynb)
+* [pandas](http://pandas.pydata.org/pandas-docs/stable/tutorials.html)
+* [scikit-learn](http://scikit-learn.org/stable/tutorial/basic/tutorial.html)
+* [scipy](http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-3-Scipy.ipynb)
+* [simpy](http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-5-Sympy.ipynb)
+
+6. License and more
 -------------------
 
 * This project is released under the `MIT License`.
